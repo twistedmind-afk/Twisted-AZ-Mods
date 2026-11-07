@@ -1,0 +1,19 @@
+{
+  "azmod": 1,
+  "id": "change-deck-on-load",
+  "name": "Change Deck On Load",
+  "version": "1.0.0",
+  "author": "Twisted / twistedmind-afk",
+  "summary": "Select the target deck after LOAD, or load the highlighted track with SELECT.",
+  "description": "Automatically select a deck after loading a track, or load the highlighted track with its SELECT button in the track list. Two independent switches; use either or both.",
+  "license": "GPL-3.0-only",
+  "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/change-deck-on-load",
+  "api": 1,
+  "firmware": [
+    "ep147-9e9454e357389ece"
+  ],
+  "hooks": true,
+  "min_core": "1.2.3",
+  "category": "controls",
+  "beta": false
+}

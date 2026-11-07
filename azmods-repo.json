@@ -1,0 +1,71 @@
+{
+  "azmods_repo": 1,
+  "name": "Twisted AZ Mods",
+  "maintainer": "twistedmind-afk",
+  "homepage": "https://github.com/twistedmind-afk/Twisted-AZ-Mods",
+  "mods": [
+    {
+      "id": "change-deck-on-load",
+      "name": "Change Deck On Load",
+      "version": "1.0.0",
+      "author": "Twisted / twistedmind-afk",
+      "summary": "Select the target deck after LOAD, or load the highlighted track with SELECT.",
+      "icon": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/change-deck-on-load-1.0.0/change-deck-on-load-1.0.0-icon.png",
+      "package": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/change-deck-on-load-1.0.0/change-deck-on-load-1.0.0.azmod",
+      "sha256": "ab39a078e86f420b3539f42a6a5bbec66b81629179f2c64bdbc8d383e792d58d",
+      "size": 67819,
+      "firmware": [
+        "ep147-9e9454e357389ece"
+      ],
+      "hooks": true,
+      "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/change-deck-on-load",
+      "updated": "2026-11-07",
+      "category": "controls",
+      "license": "GPL-3.0-only",
+      "min_core": "1.2.3",
+      "description": "Automatically select a deck after loading a track, or load the highlighted track with its SELECT button in the track list. Two independent switches; use either or both."
+    },
+    {
+      "id": "led-blink-on-air",
+      "name": "LED Blink On Air",
+      "version": "1.0.0",
+      "author": "Twisted / twistedmind-afk",
+      "summary": "Independently blink deck LOAD and SELECT LEDs while ON AIR.",
+      "icon": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/led-blink-on-air-1.0.0/led-blink-on-air-1.0.0-icon.png",
+      "package": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/led-blink-on-air-1.0.0/led-blink-on-air-1.0.0.azmod",
+      "sha256": "61fe1365bd001e707cec4b71a6f1ed69cccd57175809f36b0418446c2aa7bec0",
+      "size": 58400,
+      "firmware": [
+        "ep147-9e9454e357389ece"
+      ],
+      "hooks": true,
+      "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/led-blink-on-air",
+      "updated": "2026-11-07",
+      "category": "visual",
+      "license": "GPL-3.0-only",
+      "min_core": "1.2.3",
+      "description": "Blink LOAD and SELECT LEDs twice per second while a deck is ON AIR. Each group can be enabled independently. Selected decks blink bright/dim; unselected decks blink dim/off."
+    },
+    {
+      "id": "4-deck-pro-dj-link",
+      "name": "4 Deck Pro DJ Link",
+      "version": "1.0.0",
+      "author": "Twisted / twistedmind-afk",
+      "summary": "Broadcast four internal decks with LINK Off; retain original 2+2 with LINK On.",
+      "icon": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-1.0.0/4-deck-pro-dj-link-1.0.0-icon.png",
+      "package": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-1.0.0/4-deck-pro-dj-link-1.0.0.azmod",
+      "sha256": "5b46c0640361c0c06fa71e129f3d8b21dcb45ff21f99edd948a6554d3b71c248",
+      "size": 56923,
+      "firmware": [
+        "ep147-9e9454e357389ece"
+      ],
+      "hooks": true,
+      "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/4-deck-pro-dj-link",
+      "updated": "2026-11-07",
+      "category": "controls",
+      "license": "GPL-3.0-only",
+      "min_core": "1.2.3",
+      "description": "With normal LINK Off, all four internal decks send PRO DJ LINK data. With normal LINK On, use the original two-internal/two-external setup. Uses existing Community Mods activation and Reload."
+    }
+  ]
+}

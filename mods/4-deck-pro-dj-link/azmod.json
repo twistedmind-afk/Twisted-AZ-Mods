@@ -1,0 +1,19 @@
+{
+  "azmod": 1,
+  "id": "4-deck-pro-dj-link",
+  "name": "4 Deck Pro DJ Link",
+  "version": "1.0.0",
+  "author": "Twisted / twistedmind-afk",
+  "summary": "Broadcast four internal decks with LINK Off; retain original 2+2 with LINK On.",
+  "description": "With normal LINK Off, all four internal decks send PRO DJ LINK data. With normal LINK On, use the original two-internal/two-external setup. Uses existing Community Mods activation and Reload.",
+  "license": "GPL-3.0-only",
+  "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/4-deck-pro-dj-link",
+  "api": 1,
+  "firmware": [
+    "ep147-9e9454e357389ece"
+  ],
+  "hooks": true,
+  "min_core": "1.2.3",
+  "category": "controls",
+  "beta": false
+}

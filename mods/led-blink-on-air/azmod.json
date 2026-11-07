@@ -1,0 +1,19 @@
+{
+  "azmod": 1,
+  "id": "led-blink-on-air",
+  "name": "LED Blink On Air",
+  "version": "1.0.0",
+  "author": "Twisted / twistedmind-afk",
+  "summary": "Independently blink deck LOAD and SELECT LEDs while ON AIR.",
+  "description": "Blink LOAD and SELECT LEDs twice per second while a deck is ON AIR. Each group can be enabled independently. Selected decks blink bright/dim; unselected decks blink dim/off.",
+  "license": "GPL-3.0-only",
+  "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/led-blink-on-air",
+  "api": 1,
+  "firmware": [
+    "ep147-9e9454e357389ece"
+  ],
+  "hooks": true,
+  "min_core": "1.2.3",
+  "category": "visual",
+  "beta": false
+}

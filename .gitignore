@@ -1,0 +1,12 @@
+**/out/
+__pycache__/
+*.pyc
+dist/
+USB-Stick/
+*.log
+.azmod-sdk/
+*.tar.gz
+*.key
+*.pem
+*_ed25519*
+verified-*-known_hosts
