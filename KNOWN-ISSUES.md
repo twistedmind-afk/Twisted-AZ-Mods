@@ -21,6 +21,4 @@ Temporary workaround, in this order:
 **Do not skip the BROWSE step between Center and Left.** The workaround may need repeating
 after a restart or layout change. Alternatively, turn **Compact Track Info** off in MOD MENU.
 
-Plus 1.0.1 includes a build-specific compatibility hook for the identified affected Core.
-It does not replace the Core file. Unknown Core builds or hook conflicts require the workaround above.
-The integrated helper is awaiting hardware validation; the underlying layout correction was checked separately.
+Plus 1.0.1 includes a build-specific compatibility hook for the identified affected Core. It does not replace the Core file. Unknown Core builds or hook conflicts require the workaround above.

@@ -50,10 +50,6 @@ Temporary workaround, in this order:
 **Do not skip the BROWSE step between Center and Left.** The workaround may need repeating
 after a restart or layout change. Alternatively, turn **Compact Track Info** off in MOD MENU.
 
-Plus 1.0.1 includes a build-specific compatibility hook for the identified affected Core.
-It does not replace the Core file. Unknown Core builds or hook conflicts require the workaround above.
-The integrated helper is awaiting hardware validation; the underlying layout correction was checked separately.
-
 ## Requirements
 
 - XDJ-AZ with AZ-MODS installed.
@@ -85,3 +81,6 @@ The integrated helper is awaiting hardware validation; the underlying layout cor
 The USB ZIPs contain the mod folders; they do not replace your global mod configuration or music library.
 
 Use only one LINK role mod at a time. If the original **4 Deck Pro DJ Link** is installed, disable it before activating **Plus**.
+
+
+Plus 1.0.1 includes a build-specific compatibility hook for the identified affected Core. It does not replace the Core file. Unknown Core builds or hook conflicts require the workaround above.

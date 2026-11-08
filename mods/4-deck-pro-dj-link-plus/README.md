@@ -32,8 +32,6 @@ Compatible with **Change Deck On Load** and **LED Blink On Air**. Enable only on
 
 Complete GPL-3.0-only source, icon, license and Makefile are included here. See the repository [build instructions](../../BUILD.md). The mod uses normal SDK hooks, firmware fingerprint checks, Community Mods approval and crash recovery.
 
-Both 3+1 layouts were checked with stock CDJ-2000NXS2 firmware 1.87 in an isolated emulator. Loading a track from the AZ's USB library over LINK displayed its title, BPM, key, waveforms and cues on the CDJ. This does not establish real-hardware audio, SYNC or long-session performance.
-
 ## Integrated playhead compatibility fix
 
 Plus **1.0.1** includes a compatibility hook for the identified affected Core build
@@ -71,5 +69,3 @@ after a restart or layout change. Alternatively, turn **Compact Track Info** off
 
 Plus 1.0.1 includes the build-specific compatibility fix above. It does not include or install
 a modified Core. Use the workaround if your Core is not covered or the compatibility hook is unavailable.
-
-Validation: the integrated 1.0.1 helper was built and package-validated; no emulator playback test was performed for this release. Hardware feedback is pending. The earlier 3+1 checks above apply to the unchanged role implementation.
