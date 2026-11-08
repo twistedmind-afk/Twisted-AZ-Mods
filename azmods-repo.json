@@ -47,25 +47,25 @@
       "description": "Blink LOAD and SELECT LEDs twice per second while a deck is ON AIR. Each group can be enabled independently. Selected decks blink bright/dim; unselected decks blink dim/off."
     },
     {
-      "id": "4-deck-pro-dj-link",
-      "name": "4 Deck Pro DJ Link",
-      "version": "1.0.0",
+      "id": "4-deck-pro-dj-link-plus",
+      "name": "4 Deck Pro DJ Link Plus",
+      "version": "1.0.1",
       "author": "Twisted / twistedmind-afk",
-      "summary": "Broadcast four internal decks with LINK Off; retain original 2+2 with LINK On.",
-      "icon": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-1.0.0/4-deck-pro-dj-link-1.0.0-icon.png",
-      "package": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-1.0.0/4-deck-pro-dj-link-1.0.0.azmod",
-      "sha256": "5b46c0640361c0c06fa71e129f3d8b21dcb45ff21f99edd948a6554d3b71c248",
-      "size": 56923,
+      "summary": "Four internal LINK decks, original 2+2 or selectable 3+1 with external Deck 3 or 4.",
+      "icon": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-plus-1.0.1/4-deck-pro-dj-link-plus-1.0.1-icon.png",
+      "package": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/releases/download/4-deck-pro-dj-link-plus-1.0.1/4-deck-pro-dj-link-plus-1.0.1.azmod",
+      "sha256": "cbc2abc43d51ccf3fa141cdafc07af295a3dac5533e4bd035e0c2e173be6fc31",
+      "size": 71654,
       "firmware": [
         "ep147-9e9454e357389ece"
       ],
       "hooks": true,
-      "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/4-deck-pro-dj-link",
-      "updated": "2026-11-07",
+      "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/4-deck-pro-dj-link-plus",
+      "updated": "2026-11-08",
       "category": "controls",
       "license": "GPL-3.0-only",
       "min_core": "1.2.3",
-      "description": "With normal LINK Off, all four internal decks send PRO DJ LINK data. With normal LINK On, use the original two-internal/two-external setup. Uses existing Community Mods activation and Reload."
+      "description": "Four internal LINK decks, original 2+2 or selectable 3+1 with external Deck 3 or 4. Includes a build-specific Compact Track Info playhead compatibility fix through the normal SDK. Other Core builds remain untouched; see the README for the Center -> BROWSE -> Left workaround."
     }
   ]
 }

@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: GPL-3.0-only
-MOD_ID := 4-deck-pro-dj-link
-SRCS := mod.c link.c
+MOD_ID := 4-deck-pro-dj-link-plus
+SRCS := mod.c link.c profile.c role_vector.cpp layout_fix.c
 AZ_SDK_INCLUDE ?= ../../sdk/include
 OUT ?= out
 CFLAGS = -O2 -Wall -Wextra -Werror -fPIC -fvisibility=hidden -fno-omit-frame-pointer -fexceptions -fasynchronous-unwind-tables -fno-optimize-sibling-calls -I$(AZ_SDK_INCLUDE)
@@ -14,4 +14,4 @@ $(OUT)/%.cpp.o: %.cpp $(wildcard *.h) $(AZ_SDK_INCLUDE)/azmod-mod.h
 	@mkdir -p $(OUT)
 	g++ $(CFLAGS) -fvisibility-inlines-hidden -std=c++14 -c $< -o $@
 $(OUT)/$(MOD_ID).so: $(OBJS) exports.map
-	g++ -shared -static-libgcc -Wl,--no-undefined -Wl,--hash-style=gnu -Wl,--version-script=exports.map $(OBJS) -o $@
+	g++ -shared -static-libgcc -Wl,--no-undefined -Wl,--hash-style=gnu -Wl,--version-script=exports.map $(OBJS) -ldl -o $@

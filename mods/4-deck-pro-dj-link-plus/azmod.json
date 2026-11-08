@@ -1,0 +1,18 @@
+{
+  "azmod": 1,
+  "id": "4-deck-pro-dj-link-plus",
+  "name": "4 Deck Pro DJ Link Plus",
+  "version": "1.0.1",
+  "author": "Twisted / twistedmind-afk",
+  "summary": "Four internal LINK decks, original 2+2 or selectable 3+1 with external Deck 3 or 4.",
+  "description": "Four internal LINK decks, original 2+2 or selectable 3+1 with external Deck 3 or 4. Includes a build-specific Compact Track Info playhead compatibility fix through the normal SDK. Other Core builds remain untouched; see the README for the Center -> BROWSE -> Left workaround.",
+  "license": "GPL-3.0-only",
+  "source": "https://github.com/twistedmind-afk/Twisted-AZ-Mods/tree/main/mods/4-deck-pro-dj-link-plus",
+  "api": 1,
+  "firmware": [
+    "ep147-9e9454e357389ece"
+  ],
+  "hooks": true,
+  "min_core": "1.2.3",
+  "category": "controls"
+}

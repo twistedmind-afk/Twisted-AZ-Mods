@@ -10,7 +10,7 @@ git -C .azmod-sdk checkout 51512879d7ae3965d0ca900b447a2a2fb89e0a91
 python .azmod-sdk/tools/azmod_pack.py image
 ```
 
-From this repository, build all three mods:
+From this repository, build all three mods (including LINK Plus):
 
 ```powershell
 .\Build.ps1

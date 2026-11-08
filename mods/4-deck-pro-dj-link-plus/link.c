@@ -1,13 +1,14 @@
 /* SPDX-License-Identifier: GPL-3.0-only
- * LINK Plus p01 experimental prototype. Exact firmware only.
+ * LINK Plus fixed-slot 3+1. Exact firmware only.
  * Native LINK setting and network SystemManager remain On. Regular function hooks: selected local-role
  * listeners receive the ordinary internal-deck mode; factory count becomes four.
  * A validated four-role task enables the native allocator event-3 early return.
  * No direct object/code/setting writes, no fake packets, no network in callbacks,
- * no Core/watchdog changes. Initial state must be Off before loading this variant.
+ * no Core/watchdog changes. Native LINK may already be On at startup.
  */
 #include "azmod-mod.h"
 #include "firmware-check.h"
+#include "profile.h"
 #include <stdint.h>
 #include <string.h>
 #include "mod-id.h"
@@ -22,6 +23,15 @@ static unsigned ready;
 static uintptr_t validated_owner;
 static unsigned native_on;
 static unsigned public_on(void){return __atomic_load_n(&native_on,__ATOMIC_ACQUIRE);}
+extern int role_vector_keep(void *,unsigned);
+static unsigned mask(void){return profile_mask(public_on(),profile_current());}
+static unsigned hybrid(void){return public_on() && profile_current()!=0;}
+static const int INTERNAL=0;
+static unsigned word_at(const void *p,unsigned offset){unsigned v;memcpy(&v,(const unsigned char *)p+offset,4);return v;}
+static unsigned deck_internal(unsigned deck){return deck<4 && (mask()&(1u<<deck));}
+/* Each listener's event is authoritative; the network listener can run later. */
+static unsigned listener_internal(unsigned deck){return deck<4 && (profile_mask(1,profile_current())&(1u<<deck));}
+
 struct observation {unsigned state,kind,input,output,entries;uintptr_t owner,caller;};
 static struct observation observations[64];
 static unsigned cursor,dropped,events[4];
@@ -39,6 +49,7 @@ static void note(unsigned kind,void *owner,uintptr_t caller,unsigned input,unsig
 static listener_fn original_0;
 static void local_0(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x29ab6e8) && word_at(self,0x40)<4 && listener_internal(word_at(self,0x40)))use=&INTERNAL;
  note(0,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_0(self,item,use);
 }
@@ -46,6 +57,7 @@ static void local_0(void *self,void *item,const int *value) {
 static listener_fn original_1;
 static void local_1(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x29f2458) && word_at(self,0x1e8)<4 && listener_internal(word_at(self,0x1e8)))use=&INTERNAL;
  note(1,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_1(self,item,use);
 }
@@ -53,6 +65,7 @@ static void local_1(void *self,void *item,const int *value) {
 static listener_fn original_2;
 static void local_2(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x2a03db0) && word_at(self,0x104)==1 && word_at(self,0x108)<4 && listener_internal(word_at(self,0x108)))use=&INTERNAL;
  note(2,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_2(self,item,use);
 }
@@ -60,6 +73,7 @@ static void local_2(void *self,void *item,const int *value) {
 static listener_fn original_3;
 static void local_3(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x2a9aa20))use=&INTERNAL;
  note(3,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_3(self,item,use);
 }
@@ -67,6 +81,7 @@ static void local_3(void *self,void *item,const int *value) {
 static listener_fn original_4;
 static void local_4(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x2ed7b68))use=&INTERNAL;
  note(4,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_4(self,item,use);
 }
@@ -74,6 +89,7 @@ static void local_4(void *self,void *item,const int *value) {
 static listener_fn original_5;
 static void local_5(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x3083430))use=&INTERNAL;
  note(5,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_5(self,item,use);
 }
@@ -81,6 +97,7 @@ static void local_5(void *self,void *item,const int *value) {
 static listener_fn original_6;
 static void local_6(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x3167f08))use=&INTERNAL;
  note(6,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_6(self,item,use);
 }
@@ -88,6 +105,7 @@ static void local_6(void *self,void *item,const int *value) {
 static listener_fn original_7;
 static void local_7(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x3188de8))use=&INTERNAL;
  note(7,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_7(self,item,use);
 }
@@ -95,6 +113,7 @@ static void local_7(void *self,void *item,const int *value) {
 static listener_fn original_8;
 static void local_8(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x31a0418) && word_at(self,0x1e8)<4 && listener_internal(word_at(self,0x1e8)))use=&INTERNAL;
  note(8,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_8(self,item,use);
 }
@@ -102,6 +121,11 @@ static void local_8(void *self,void *item,const int *value) {
 static listener_fn original_9;
 static void local_9(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x31b9db0)) {
+  const uintptr_t *p=self;
+  const unsigned char *a=(const unsigned char *)p[6],*b=(const unsigned char *)p[7];
+  if(identity(a,0x31ba738) && identity(b,0x31ba738) && a[12]>=1 && a[12]<=2 && b[12]==a[12]+2 && listener_internal(b[12]-1))use=&INTERNAL;
+ }
  note(9,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  original_9(self,item,use);
  /* The independent LOAD mod captures the queued native setting task. */
@@ -111,29 +135,98 @@ static void local_9(void *self,void *item,const int *value) {
 static listener_fn crawler_original;
 static void crawler_mode(void *self,void *item,const int *value) {
  const int *use=value;
+ if(profile_current()!=0 && value && *value==1 && identity(self,0x2926a10))use=&INTERNAL;
  note(10,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  crawler_original(self,item,use);
+}
+/* Native overview constructor owns a four-element vector of CautionManager
+ * pointers. Copy identity metadata only; never dereference a saved pointer. */
+struct caution_identity {unsigned state,deck;uintptr_t target;};
+static struct caution_identity caution_ids[64];
+static unsigned caution_deck(const void *target) {
+ for(unsigned i=0;i<64;i++)if(__atomic_load_n(&caution_ids[i].state,__ATOMIC_ACQUIRE)==1 && caution_ids[i].target==(uintptr_t)target)return __atomic_load_n(&caution_ids[i].deck,__ATOMIC_ACQUIRE);
+ return 99;
+}
+static void remember_caution(const void *target,unsigned deck) {
+ for(unsigned i=0;i<64;i++) {
+  unsigned state=__atomic_load_n(&caution_ids[i].state,__ATOMIC_ACQUIRE);
+  if(state==1 && caution_ids[i].target==(uintptr_t)target){__atomic_store_n(&caution_ids[i].deck,deck,__ATOMIC_RELEASE);return;}
+  unsigned zero=0;
+  if(__atomic_compare_exchange_n(&caution_ids[i].state,&zero,2,0,__ATOMIC_ACQUIRE,__ATOMIC_RELAXED)) {
+   caution_ids[i].target=(uintptr_t)target;caution_ids[i].deck=deck;
+   __atomic_store_n(&caution_ids[i].state,1,__ATOMIC_RELEASE);return;
+  }
+ }
+}
+static void (*overview_ctor_original)(void *,void *);
+static void overview_ctor(void *self,void *context) {
+ overview_ctor_original(self,context);
+ const uintptr_t *v=(const uintptr_t *)((const unsigned char *)self+0x38);
+ uintptr_t begin=v[0],end=v[1];
+ if(!begin || (begin&7) || end<begin || end-begin!=4*sizeof(void *))return;
+ for(unsigned d=0;d<4;d++) {
+  void *target=*(void **)(begin+d*sizeof(void *));
+  if(!identity(target,0x31af208))continue;
+  remember_caution(target,d);note(192,target,(uintptr_t)__builtin_return_address(0),d,mask(),0);
+  /* Its setting registration can precede completion of the parent ctor.
+   * Apply only the ordinary native clear request for this internal deck. */
+  if(d>=2 && hybrid() && deck_internal(d)) {
+   void (*clear_native)(void *,unsigned)=(void (*)(void *,unsigned))(uintptr_t)0x1ac5580;
+   clear_native(target,0x23);
+  }
+ }
 }
 /* Only the native LINK PLAYER caution listener receives internal mode. */
 static listener_fn caution_original;
 static void caution_mode(void *self,void *item,const int *value) {
  const int *use=value;
+ if(identity(self,0x2d165c8)) {
+  const void *target=*(const void *const *)((const unsigned char *)self+0x50);
+  if(target && !((uintptr_t)target&7)) {
+   uintptr_t vt=*(const uintptr_t *)target;
+   unsigned d=caution_deck(target);
+   if(profile_current()!=0 && value && *value==1 && d<4 && listener_internal(d))use=&INTERNAL;
+   if(vt==0x31af208)note(191,(void *)target,(uintptr_t)__builtin_return_address(0),d,use?(unsigned)*use:99,(unsigned)vt);
+  }
+ }
  note(11,self,(uintptr_t)__builtin_return_address(0),value?(unsigned)*value:99,use?(unsigned)*use:99,0);
  caution_original(self,item,use);
 }
 static count_fn count_original;
+/* The initial setting can queue LINK PLAYER before the owning overview has
+ * completed construction. Clearing in the constructor alone is too early.
+ * Filter only that exact caution, on a validated internal secondary deck, at
+ * its ordinary native request entry. No periodic clearing or task mutation.
+ */
+static void (*caution_request_original)(void *,unsigned);
+static void caution_request(void *target,unsigned kind) {
+ if(kind==0x23 && profile_current()!=0 && identity(target,0x31af208)) {
+  unsigned deck=caution_deck(target);
+  if(deck>=2 && deck<4 && listener_internal(deck)) {
+   note(195,target,(uintptr_t)__builtin_return_address(0),deck,0,kind);
+   return;
+  }
+ }
+ caution_request_original(target,kind);
+}
 static mode_fn mixer_original,network_original;
 static run_fn task_original;
 static packet_fn packet_original;
 static void player_count(void *owner,unsigned count) {
  uintptr_t caller=(uintptr_t)__builtin_return_address(0);unsigned use=count;
  if(__atomic_load_n(&ready,__ATOMIC_ACQUIRE) && (count==2 || count==4) && caller==0x13e4a28 &&
-    identity(owner,0x2bbf270) && ((const unsigned char *)owner)[0x400]==0x64) use=public_on()?2:4;
+    identity(owner,0x2bbf270) && ((const unsigned char *)owner)[0x400]==0x64) use=public_on()?(profile_current()?3:2):4;
  note(100,owner,caller,count,use,0);
- count_original(owner,use);
+ if(__atomic_load_n(&ready,__ATOMIC_ACQUIRE) && hybrid() && caller==0x13e4a28 && identity(owner,0x2bbf270) && ((const unsigned char *)owner)[0x400]==0x64) {
+  count_original(owner,4);
+  int rc=role_vector_keep(owner,mask());
+  note(181,owner,caller,mask(),(unsigned)rc,0);
+  if(rc)count_original(owner,2); /* Native two-player fallback; no conflicting local 3/4 identities. */
+ } else count_original(owner,use);
 }
 static void mixer_mode(void *owner,unsigned char mode) {
  uintptr_t caller=(uintptr_t)__builtin_return_address(0);unsigned char use=mode;
+ if(hybrid() && mode==1 && caller==0xb61850 && identity(owner,0x31f5728))use=0;
  note(101,owner,caller,mode,use,0);
  mixer_original(owner,use);
 }
@@ -163,22 +256,29 @@ static void player_task(void *task) {
   const unsigned char *p=owner;
   uintptr_t begin=*(const uintptr_t *)(p+0x398),end=*(const uintptr_t *)(p+0x3a0);
   if(end>=begin && (end-begin)%0x50==0 && (end-begin)/0x50<=8) count=(unsigned)((end-begin)/0x50);
-  unsigned players=public_on()?2:4;
+  unsigned players=public_on()?(profile_current()?3:2):4;
   if(__atomic_load_n(&ready,__ATOMIC_ACQUIRE) && p[0x400]==0x64 && begin && count==players+1) {
    const unsigned char *roles=(const unsigned char *)begin;
    unsigned valid=1;
-   for(unsigned i=0;i<players;++i) if(roles[i*0x50]!=1 || roles[i*0x50+1]!=i+1) valid=0;
+   unsigned slot=0;
+   for(unsigned i=0;i<4;++i)if(mask()&(1u<<i)) {
+    if(slot>=players || roles[slot*0x50]!=1 || roles[slot*0x50+1]!=i+1)valid=0;
+    ++slot;
+   }
+   if(slot!=players)valid=0;
    if(roles[players*0x50]!=2 || roles[players*0x50+1]!=33) valid=0;
    if(valid) __atomic_store_n(&validated_owner,(uintptr_t)owner,__ATOMIC_RELEASE);
   }
  }
  note(103,owner,(uintptr_t)__builtin_return_address(0),mode,mode,count);
 }
-/* No role-vector access here: player_task publishes its validation on the native
+/* Hybrid mode must use native assignment/admission; the four-internal
+ * early-return applies only when every deck number is local.
+ * No role-vector access here: player_task publishes its validation on the native
  * thread after the factory completes. Event 3 already has a native return-5 path. */
 static unsigned operate_packet(void *self,unsigned event,const void *ip,const void *wlan) {
  if(__atomic_load_n(&ready,__ATOMIC_ACQUIRE) && (event&0xffu)==3 &&
-    !public_on() && identity(self,0x2bc1d78)) {
+    mask()==15 && identity(self,0x2bc1d78)) {
   void *owner=*(void *const *)((const unsigned char *)self+0x10);
   if((uintptr_t)owner==__atomic_load_n(&validated_owner,__ATOMIC_ACQUIRE) &&
      identity(owner,0x2bbf270) && ((const unsigned char *)owner)[0x400]==0x64) {
@@ -187,6 +287,17 @@ static unsigned operate_packet(void *self,unsigned event,const void *ip,const vo
   }
  }
  return packet_original(self,event,ip,wlan);
+}
+
+extern void *native_lookup_original;
+extern void allocation_lookup(void);
+unsigned link_reserves_number(void *owner,unsigned number,uintptr_t caller) {
+ if(caller!=0x13f2b90 || !hybrid() || number<3 || number>4 ||
+    !__atomic_load_n(&ready,__ATOMIC_ACQUIRE) || !identity(owner,0x2bbf270) ||
+    (uintptr_t)owner!=__atomic_load_n(&validated_owner,__ATOMIC_ACQUIRE))return 0;
+ unsigned occupied=!!(mask()&(1u<<(number-1)));
+ if(occupied)note(194,owner,caller,number,0,mask());
+ return occupied;
 }
 /* Observers call their original exactly once. Native buffers are read only
  * before returning to their owner, never retained or used from tick. */
@@ -247,7 +358,7 @@ static void retain_four_transmitters(void *self,unsigned char index,uintptr_t ca
  if(__atomic_load_n(&ready,__ATOMIC_ACQUIRE) && index<4 &&
     (caller==0x10e2538 || caller==0x10e23cc) &&
     __atomic_load_n(&validated_owner,__ATOMIC_ACQUIRE) && identity(self,0x2bbdd18)) {
-  unsigned mode=public_on()?1:0;
+  unsigned mode=mask()==3?1:0;
   unsigned before=((const unsigned char *)self)[0x20];
   if(before<=1 && before!=mode) {
    mode_fn set_native_policy=(mode_fn)(uintptr_t)0x13d1290;
@@ -258,11 +369,11 @@ static void retain_four_transmitters(void *self,unsigned char index,uintptr_t ca
 }
 static void transmit_full(void *self,const void *data,const void *destination,unsigned char index) {
  retain_four_transmitters(self,index,(uintptr_t)__builtin_return_address(0));
- full_original(self,data,destination,index);
+ if(!hybrid() || deck_internal(index))full_original(self,data,destination,index);
 }
 static void transmit_condensed(void *self,const void *data,const void *destination,unsigned char index) {
  retain_four_transmitters(self,index,(uintptr_t)__builtin_return_address(0));
- condensed_original(self,data,destination,index);
+ if(!hybrid() || deck_internal(index))condensed_original(self,data,destination,index);
 }
 void link_deck_event(int deck,int event,void *user) {
  (void)user;if(deck>=0 && deck<4 && event==AZ_DECK_LOADED) __atomic_fetch_add(&events[deck],1,__ATOMIC_RELAXED);
@@ -348,10 +459,17 @@ int link_prepare(const az_core_v1 *core) {
  if(!firmware_matches(0x13d37b8, 16, UINT64_C(0xb2dfaa03db57fb65)))return 123;
  
  if(!firmware_matches(0x13d1290, 16, UINT64_C(0x3cd320c06a51a42f)))return 124;
+ if(!firmware_matches(0x13e5670,16,UINT64_C(0x80d5739cf6b4aaf8)))return 126;
+ if(!firmware_matches(0x13e5810,16,UINT64_C(0x9c691015efe761a0)))return 126;
+ if(!firmware_matches(0x13e5f50,16,UINT64_C(0x3f63091a2735059a)))return 126;
+ if(!firmware_matches(0x217e968,16,UINT64_C(0x061b9152eb3660ac)))return 127;
+ if(!firmware_matches(0x1ac5580,16,UINT64_C(0xdef91ab135c6a4be)))return 127;
+ if(!firmware_matches(0x13dc650,16,UINT64_C(0x97a656c2bac97f98)))return 129;
+ if(!firmware_matches(0x1ac4f40,16,UINT64_C(0xbdbfa0169010db62)))return 130;
  return 0;
 }
 int link_install(const az_core_v1 *core) {
- core->log(ID,"LINK Plus p02: public Off=four; public On=original 2+2; restore native transmitter policy in both directions");
+ core->log(ID,"LINK Plus p11: explicit 3+1 slot selection; native admission and occupied-slot reservation");
  if(core->claim_hook(ID,0x93d2f8,(void *)local_0,(void **)&original_0))return 40;
  if(core->claim_hook(ID,0xa78fc0,(void *)local_1,(void **)&original_1))return 41;
  if(core->claim_hook(ID,0xaac4d0,(void *)local_2,(void **)&original_2))return 42;
@@ -374,5 +492,8 @@ int link_install(const az_core_v1 *core) {
  if(core->claim_hook(ID,0x10e0c18,(void *)sender_observer,(void **)&sender_original))return 69;
  if(core->claim_hook(ID,0x13d2360,(void *)transmit_full,(void **)&full_original))return 70;
  if(core->claim_hook(ID,0x13d37b8,(void *)transmit_condensed,(void **)&condensed_original))return 71;
+ if(core->claim_hook(ID,0x217e968,(void *)overview_ctor,(void **)&overview_ctor_original))return 73;
+ if(core->claim_hook(ID,0x13dc650,(void *)allocation_lookup,&native_lookup_original))return 75;
+ if(core->claim_hook(ID,0x1ac4f40,(void *)caution_request,(void **)&caution_request_original))return 76;
  __atomic_store_n(&ready,1,__ATOMIC_RELEASE);return 0;
 }
